@@ -28,10 +28,13 @@ export const login = async (req, res, next) => {
         //create token to save cookies
         const token = jwt.sign({id: user._id, isAdmin: user.isAdmin}, process.env.JWT)
 
-        const {password, isAdmin, ...otherDetails} = user._doc
-        res.cookie("access_token", token, {
-            httpOnly: true,
-        }).status(200).json({otherDetails})
+        // const {password, isAdmin, ...otherDetails} = user._doc
+        // res.cookie("access_token", token, {
+        //     httpOnly: true,
+        // }).status(200).json({otherDetails})
+        res.status(200).json({
+            access_token: token,
+          });
     } catch (error) {
         next(error)
     }

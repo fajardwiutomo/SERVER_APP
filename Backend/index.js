@@ -1,5 +1,6 @@
 import express from "express";
 import userRouter from "./routes/users.js";
+import movieRouter from "./routes/movie.js"
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -29,6 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", userRouter);
+app.use("/", movieRouter);
 
 app.use(errorHandler)
 
