@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
 import { createError } from "../utils/errorFiles.js";
 
-export const verifyToken = (req, res, next) => {
-  const token = req.cookies.access_token;
+export const verifyToken = async (req, res, next) => {
+  const token = req.headers;
 
   if (!token) {
     throw {
@@ -13,7 +13,6 @@ export const verifyToken = (req, res, next) => {
   }
 
   jwt.verify(token, process.env.JWT, (err, user) => {
-    console.log(user,">>>>")
     if (err) {
       throw {
         name: "Unauthorized",
