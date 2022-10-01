@@ -1,5 +1,5 @@
 import "./login.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,11 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  
+
+  useEffect(() => {
+    const signedIn = localStorage.getItem("access_token")
+  }, []);
 
   const login = async () => {
     try {
@@ -16,6 +21,7 @@ export const Login = () => {
         password: password,
       });
       localStorage.setItem("access_token", response.data);
+      navigate('/home')
       Swal.fire({
         title: "Success!",
         text: "login successfully",
@@ -37,7 +43,6 @@ export const Login = () => {
     login();
     setEmail("");
     setPassword("");
-    navigate("/home");
   }
 
   return (
